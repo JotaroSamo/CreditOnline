@@ -1,0 +1,137 @@
+﻿@using LogicalModel
+@model IEnumerable<CreditCard>
+
+@{
+    ViewData["Title"] = "Администратор";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-image: url('https://cdn.pixabay.com/photo/2017/10/25/19/46/piggy-bank-2889046_960_720.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .navbar {
+            background-color: #ff6600; /* Оранжевый цвет Белагропром банка */
+            height: 60px;
+        }
+
+        .navbar-brand {
+            color: white;
+            line-height: 60px;
+            padding: 0 15px; /* Добавлены отступы слева и справа */
+        }
+
+        .navbar-nav .nav-link {
+            color: white;
+            line-height: 60px;
+            padding: 0 15px; /* Добавлены отступы слева и справа */
+        }
+
+        .btn-primary {
+            background-color: #ff6600; /* Оранжевый цвет Белагропром банка */
+            border-color: #ff6600;
+        }
+
+        .card {
+            min-height: 200px;
+            background-color: rgba(255, 255, 255, 0.3); /* Прозрачный фон */
+            border-radius: 15px; /* Закругленные углы */
+            margin-bottom: 20px;
+        }
+
+        .card-body {
+            text-align: center; /* Выравнивание текста по центру */
+        }
+
+        .btn-danger,
+        .btn-warning {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/Admin/Index">Онлайн Банк</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Admin/NewCreditCard">Создать новый кредит</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Просмотр заявок</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Просмотр пользователей</a>
+                    </li>
+                </ul>
+                <form id="searchForm" class="form-inline ml-auto">
+                    <input id="searchInput" class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search">
+                    <button class="btn btn-primary my-2 my-sm-0" type="submit">Найти</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            @foreach (var creditCard in Model)
+            {
+                <div class="col-md-4 card-filter">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Кредитная карта</h5>
+                            <p class="card-text">Срок: @creditCard.Term месяцев</p>
+                            <p class="card-text">Процентная ставка: @creditCard.InterestRate %</p>
+                            <p class="card-text">Максимальная сумма: @creditCard.MaxAmount BYN</p>
+                            <form method="post">
+                                <button type="submit" formaction="/Admin/Delete" formmethod="post" class="btn btn-danger">Удалить</button>
+                                <button type="submit" class="btn btn-warning" formaction="/Admin/EditCreditCard" formmethod="post">Изменить</button>
+                                <input type="hidden" name="CardID" value="@creditCard.CardID" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(function () {
+            // Обработчик события отправки формы поиска
+            $('#searchForm').submit(function (e) {
+                e.preventDefault(); // Предотвращаем стандартное поведение формы (перезагрузку страницы)
+
+                var searchValue = $('#searchInput').val().toLowerCase(); // Получаем значение из поля ввода поиска
+
+                $('.card-filter').each(function () {
+                    var term = $(this).find('.card-text').text().toLowerCase();
+                    if (term.indexOf(searchValue) > -1) {
+                        $(this).show(); // Показываем карточку, если она соответствует запросу
+                    } else {
+                        $(this).hide(); // Скрываем карточку, если она не соответствует запросу
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

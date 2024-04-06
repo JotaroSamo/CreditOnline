@@ -1,0 +1,117 @@
+﻿@page
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Онлайн Банк</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-image: url('https://cdn.pixabay.com/photo/2017/10/25/19/46/piggy-bank-2889046_960_720.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .navbar {
+            background-color: #ff6600; /* Оранжевый цвет Белагропром банка */
+            height: 60px;
+        }
+
+        .navbar-brand {
+            color: white;
+            line-height: 60px;
+        }
+
+        .navbar-nav .nav-link {
+            color: white;
+            line-height: 60px;
+        }
+
+        .btn-primary {
+            background-color: #ff6600; /* Оранжевый цвет Белагропром банка */
+            border-color: #ff6600;
+        }
+
+        .card {
+            min-height: 450px;
+            max-height:450px;
+            background-color: rgba(255, 255, 255, 0.3); /* Прозрачный фон */
+            border-radius: 15px; /* Закругленные углы */
+        }
+
+        .card-body {
+            text-align: center; /* Выравнивание текста по центру */
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/Home/Index">Онлайн Банк</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Auth/Login">Войти</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Auth/Register">Зарегистрироваться</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-center" style=" color: white;">Добро пожаловать в Онлайн Банк</h1>
+                <p class="text-center" style=" color: white;">Управляйте своими кредитами онлайн с помощью нашего удобного сервиса.</p>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://cdn.pixabay.com/photo/2017/10/25/19/45/piggy-bank-2889042_960_720.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Новости и обновления</h5>
+                        <p class="card-text">Узнайте последние новости о банке и обновления в услугах онлайн банка.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://cdn.pixabay.com/photo/2017/08/30/07/56/money-2696228_1280.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Безопасность</h5>
+                        <p class="card-text">Мы обеспечиваем высокий уровень безопасности ваших финансовых операций.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://cdn.pixabay.com/photo/2023/03/28/01/10/money-7881948_1280.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Удобство и доступность</h5>
+                        <p class="card-text">Операции с вашими счетами доступны в любое время и из любой точки мира.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
