@@ -1,15 +1,12 @@
 ﻿@using LogicalModel
-@model IEnumerable<CreditAplication>
-@{
-    ViewData["Title"] = "Администратор";
-}
+@model IEnumerable<CreditCard>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewData["Title"]</title>
+    <title>Онлайн Банк - Просмотр кредитов</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
     <style>
         body {
@@ -88,16 +85,25 @@
 
     <div class="container mt-4">
         <div class="row">
-            @foreach (var creditApplication in Model)
+            @foreach (var creditCard in Model)
             {
                 <div class="col-md-4 card-filter">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Заявка на кредит</h5>
-                            <p class="card-text">Сумма кредита: @creditApplication.LoanAmount</p>
-                            <p class="card-text">Статус: @creditApplication.Status</p>
-                            <p class="card-text">Дата подачи заявки: @creditApplication.ApplicationDate</p>
-                         
+                            <h5 class="card-title">Кредитная карта</h5>
+                            <p class="card-text">Срок: @creditCard.Term месяцев</p>
+                            <p class="card-text">Процентная ставка: @creditCard.InterestRate %</p>
+                            <p class="card-text">Максимальная сумма: @creditCard.MaxAmount BYN</p>
+
+                            <!-- Форма для оформления заявки -->
+                            <form method="post" action="/Client/ApplyForCredit">
+                                <div class="form-group">
+                                    <label for="loanAmount">Сумма кредита (BYN):</label>
+                                    <input type="number" class="form-control" id="loanAmount" name="loanAmount" required>
+                                </div>
+                                <input type="hidden" name="cardId" value="@creditCard.CardID" />
+                                <button type="submit" class="btn btn-success">Оформить</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -122,6 +128,18 @@
                         $(this).hide(); // Скрываем карточку, если она не соответствует запросу
                     }
                 });
+            });
+        });
+        $(function () {
+            // Обработчик изменения значения в поле ввода суммы кредита
+            $('#loanAmount').on('input', function () {
+                var maxAmount = parseFloat('@creditCard.MaxAmount'); // Максимальная сумма кредита на выбранной карте
+                var inputAmount = parseFloat($(this).val()); // Введенная пользователем сумма кредита
+
+                // Если введенная сумма больше максимальной суммы, устанавливаем значение поля ввода на максимальную сумму
+                if (inputAmount > maxAmount) {
+                    $(this).val(maxAmount);
+                }
             });
         });
     </script>

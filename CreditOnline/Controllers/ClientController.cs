@@ -40,5 +40,21 @@ namespace CreditOnline.Controllers
             await _user.UpdateAsync(user);
             return RedirectToAction("Index");
         }
+        public async Task<IActionResult> CreditCard()
+        { 
+            var creditcard = await _creditCard.GetAllAsync();
+            return View(creditcard);
+        }
+        [HttpPost]
+        public async Task<IActionResult> ApplyForCredit(int cardId, decimal loanAmount, decimal InterestRate)
+        {
+            CreditAplication creditAplication = new CreditAplication();
+            creditAplication.UserID = GetCurrentUserId();
+            creditAplication.CardID = cardId;
+            creditAplication.LoanAmount = loanAmount + (loanAmount * (InterestRate/100));
+            await _creditAplication.CreateAsync(creditAplication);
+            return RedirectToAction("Index");
+            
+        }
     }
 }
