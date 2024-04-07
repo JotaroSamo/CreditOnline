@@ -73,7 +73,7 @@ namespace CreditOnline.Controllers
             new Claim(ClaimTypes.Role, user.UserTypes.ToString())
         };
 
-                if (user.UserTypes.ToString() == "Admin")
+                if (user.UserTypes.ToString() == "Администратор")
                 {
 
                     var claimIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

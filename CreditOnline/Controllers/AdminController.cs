@@ -9,10 +9,12 @@ namespace CreditOnline.Controllers
     {
         private readonly IRepository<CreditAplication> _creditAplication;
         private readonly IRepository<CreditCard> _creditCard;
-        public AdminController(IRepository<CreditAplication> creditAplication, IRepository<CreditCard> creditCard)
+        private readonly IRepository<User> _user;
+        public AdminController(IRepository<CreditAplication> creditAplication, IRepository<CreditCard> creditCard, IRepository<User> user)
         {
             _creditAplication = creditAplication;
             _creditCard = creditCard;
+            _user = user;
         }
         public async Task<IActionResult> Index()
         {
@@ -37,7 +39,7 @@ namespace CreditOnline.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditCreditCard(int CardID) 
+        public async Task<IActionResult> EditCreditCard(int CardID)
         {
             var creditcard = await _creditCard.GetByIdAsync(CardID);
             return View(creditcard);
@@ -47,6 +49,30 @@ namespace CreditOnline.Controllers
         {
             await _creditCard.UpdateAsync(creditCard);
             return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public async Task<IActionResult> UsersPage()
+        {
+            var users = await _user.GetAllAsync();
+            return View(users);
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(int UserID)
+        {
+            await _user.DeleteAsync(UserID);
+            return RedirectToAction("UsersPage");
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditUsers(int UserID)
+        {
+            var users = await _user.GetByIdAsync(UserID);
+            return View(users);
+        }
+        [HttpPost]
+        public async Task<IActionResult> SaveEditUsers(User user)
+        {
+            await _user.UpdateAsync(user);
+            return RedirectToAction("UsersPage");
         }
     }
 }

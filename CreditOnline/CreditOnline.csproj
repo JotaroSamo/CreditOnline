@@ -14,8 +14,4 @@
     <None Include="wwwroot\img\main.jpg" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Client\" />
-  </ItemGroup>
-
 </Project>

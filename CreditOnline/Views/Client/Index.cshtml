@@ -1,5 +1,5 @@
 ﻿@using LogicalModel
-@model IEnumerable<CreditCard>
+@model IEnumerable<CreditApplication>
 
 @{
     ViewData["Title"] = "Администратор";
@@ -73,13 +73,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/Admin/NewCreditCard">Создать новый кредит</a>
+                        <a class="nav-link" href="/Admin/NewCreditCard">Просмотр кредитов</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Просмотр заявок</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" formmethod="get" href="/Admin/UsersPage">Просмотр пользователей</a>
+                        <a class="nav-link" formmethod="get" href="/Admin/UsersPage">Редактировать аккаунт</a>
                     </li>
                 </ul>
                 <form id="searchForm" class="form-inline ml-auto">
@@ -92,20 +92,16 @@
 
     <div class="container mt-4">
         <div class="row">
-            @foreach (var creditCard in Model)
+            @foreach (var creditApplication in Model)
             {
                 <div class="col-md-4 card-filter">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Кредитная карта</h5>
-                            <p class="card-text">Срок: @creditCard.Term месяцев</p>
-                            <p class="card-text">Процентная ставка: @creditCard.InterestRate %</p>
-                            <p class="card-text">Максимальная сумма: @creditCard.MaxAmount BYN</p>
-                            <form method="post">
-                                <button type="submit" formaction="/Admin/Delete" formmethod="post" class="btn btn-danger">Удалить</button>
-                                <button type="submit" class="btn btn-warning" formaction="/Admin/EditCreditCard" formmethod="post">Изменить</button>
-                                <input type="hidden" name="CardID" value="@creditCard.CardID" />
-                            </form>
+                            <h5 class="card-title">Заявка на кредит</h5>
+                            <p class="card-text">Сумма кредита: @creditApplication.LoanAmount</p>
+                            <p class="card-text">Статус: @creditApplication.Status</p>
+                            <p class="card-text">Дата подачи заявки: @creditApplication.ApplicationDate</p>
+                            <!-- Добавьте остальные поля по желанию -->
                         </div>
                     </div>
                 </div>

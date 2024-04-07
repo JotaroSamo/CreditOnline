@@ -1,5 +1,135 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using LogicalModel
+@model User
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактирование информации о пользователе</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-image: url('https://cdn.pixabay.com/photo/2017/10/25/19/46/piggy-bank-2889046_960_720.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .navbar {
+            background-color: #ff6600; /* Оранжевый цвет Белагропром банка */
+            height: 60px;
+        }
+
+        .navbar-brand {
+            color: white;
+            line-height: 60px;
+        }
+
+        .navbar-nav .nav-link {
+            color: white;
+            line-height: 60px;
+        }
+
+        .btn-primary {
+            background-color: #ff6600; /* Оранжевый цвет Белагропром банка */
+            border-color: #ff6600;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.3); /* Прозрачный фон */
+            border-radius: 15px; /* Закругленные углы */
+        }
+
+        .card-body {
+            text-align: center; /* Выравнивание текста по центру */
+        }
+
+        .form-control {
+            border-radius: 10px; /* Закругленные углы для полей ввода */
+        }
+
+            .form-control:focus {
+                border-color: #ff6600; /* Оранжевый цвет обводки при фокусе */
+                box-shadow: 0 0 0 0.2rem rgba(255, 102, 0, 0.25); /* Тень при фокусе */
+            }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/Home/Index">Онлайн Банк</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Admin/NewCreditCard">Создать новый кредит</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Просмотр заявок</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Просмотр пользователей</a>
+                    </li>
+                </ul>
+                <form id="searchForm" class="form-inline ml-auto">
+                    <input id="searchInput" class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search">
+                    <button class="btn btn-primary my-2 my-sm-0" type="submit">Найти</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Редактирование информации о пользователе</h5>
+                        <form method="post" action="/Admin/SaveEditUsers">
+                            <div class="form-group">
+                                <label for="Name">Имя пользователя:</label>
+                                <input type="text" class="form-control" id="Name" name="Name" value="@Model.Name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="Password">Пароль:</label>
+                                <input type="password" class="form-control" id="Password" name="Password" value="@Model.Password" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="WorkPlace">Место работы:</label>
+                                <input type="text" class="form-control" id="WorkPlace" name="WorkPlace" value="@Model.WorkPlace">
+                            </div>
+                            <div class="form-group">
+                                <label for="Salary">Зарплата BYN:</label>
+                                <input type="text" class="form-control" id="Salary" name="Salary" value="@Model.Salary">
+                            </div>
+                            <div class="form-group">
+                                <label for="UserTypes">Тип пользователя:</label>
+                                <select asp-for="UserTypes" class="form-control" id="UserTypes" name="UserTypes" required>
+                                    <option value="@Model.UserTypes">@Model.UserTypes.ToString()</option>
+                                    @if (Model.UserTypes.ToString() == "Администратор")
+                                    {
+                                        <option value="0">Клиент</option>
+
+                                    }
+                                    else
+                                    {
+                                        <option value="1">Администратор</option>
+                                    }
+                            </select>
+                            </div>
+                            <input type="hidden" name="UserID" value="@Model.UserID" />
+                            <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
