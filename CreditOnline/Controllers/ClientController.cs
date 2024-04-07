@@ -27,5 +27,18 @@ namespace CreditOnline.Controllers
             var creditapp = _creditAplication.GetListByID(GetCurrentUserId());
             return View(creditapp);
         }
+        [HttpPost]
+        public async Task<IActionResult> EditUsers()
+        {
+            int UserID = GetCurrentUserId();
+            var users = await _user.GetByIdAsync(UserID);
+            return View(users);
+        }
+        [HttpPost]
+        public async Task<IActionResult> SaveEditUsers(User user)
+        {
+            await _user.UpdateAsync(user);
+            return RedirectToAction("Index");
+        }
     }
 }
