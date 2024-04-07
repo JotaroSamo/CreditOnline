@@ -1,9 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@using LogicalModel
+@model IEnumerable<CreditAplication>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Редактирование кредитной карты</title>
+    <title>Просмотр заявок</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
     <style>
         body {
@@ -75,39 +77,47 @@
                     <li class="nav-item">
                         <a class="nav-link" formmethod="get" href="/Admin/UsersPage">Просмотр пользователей</a>
                     </li>
-                <form id="searchForm" class="form-inline ml-auto">
-                    <input id="searchInput" class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search">
-                    <button class="btn btn-primary my-2 my-sm-0" type="submit">Найти</button>
-                </form>
+                </ul>
             </div>
         </div>
     </nav>
+    <div class="container mt-4">
+        <div class="row">
+            @foreach (var creditApplication in Model)
+            {
+                @if (creditApplication.Status == ApplicationStatus.Ожидание)
+                {
+                    <div class="col-md-4 card-filter">
+                        <div class="card">
+                            <div class="card-body">
+                                <form method="post" action="/Admin/CreditApplicationStatus">
+                                    <h5 class="card-title">Заявка на кредит</h5>
+                                    <p class="card-text">Сумма кредита: @creditApplication.LoanAmount</p>
+                                    <p class="card-text">Статус: @creditApplication.Status</p>
+                                    <p class="card-text">Доверие(0-100): @creditApplication.TrustLevel</p>
+                                    <p class="card-text">Имя: @creditApplication.User.Name</p>
+                                    <p class="card-text">Место работы: @creditApplication.User.WorkPlace</p>
+                                    <p class="card-text">Зарплата BYN: @creditApplication.User.Salary</p>
+                                    <p class="card-text">Дата подачи заявки: @creditApplication.ApplicationDate</p>
 
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Редактирование кредитной карты</h5>
-                        <form method="post" action="/Admin/SaveEditCreditCard">
-                            <div class="form-group">
-                                <label for="Term">Срок кредита (месяцы):</label>
-                                <input type="text" class="form-control" id="Term" name="Term" value="@Model.Term" required>
+                                    <!-- Добавляем выпадающий список для выбора нового статуса -->
+                                    <select name="newStatus">
+                                        <option value="Одобрено">Одобрено</option>
+                                        <option value="Отклонено">Отклонено</option>
+                                        <option value="Оплачен">Оплачен</option>
+                                    </select>
+
+                                    <!-- Передаем идентификатор заявки для изменения -->
+                                    <input type="hidden" name="applicationId" value="@creditApplication.ApplicationID" />
+
+                                    <button type="submit" class="btn btn-success">Изменить статус</button>
+                                </form>
                             </div>
-                            <div class="form-group">
-                                <label for="InterestRate">Процентная ставка:</label>
-                                <input type="text" class="form-control" id="InterestRate" name="InterestRate" value="@Model.InterestRate" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="MaxAmount">Максимальная сумма кредита:</label>
-                                <input type="text" class="form-control" id="MaxAmount" name="MaxAmount" value="@Model.MaxAmount" required>
-                            </div>
-                            <input type="hidden" name="CardID" value="@Model.CardID" />
-                            <button type="submit" class="btn btn-primary">Сохранить изменения</button>
-                        </form>
+                        </div>
                     </div>
-                </div>
-            </div>
+                }
+              
+            }
         </div>
     </div>
 </body>

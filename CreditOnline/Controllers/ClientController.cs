@@ -21,13 +21,13 @@ namespace CreditOnline.Controllers
         {
             return int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            HttpContext.Session.SetInt32("UserID", GetCurrentUserId());
-            var creditapp = _creditAplication.GetListByID(GetCurrentUserId());
+            HttpContext.Session.SetInt32("UserId", GetCurrentUserId());
+            var creditapp = await _creditAplication.GetListByID(GetCurrentUserId());
             return View(creditapp);
         }
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> EditUsers()
         {
             int UserID = GetCurrentUserId();
@@ -56,5 +56,22 @@ namespace CreditOnline.Controllers
             return RedirectToAction("Index");
             
         }
+        [HttpPost]
+        public async Task<IActionResult> PayCredit(decimal paymentAmount, int applicationId)
+        {
+            var creditapp = await _creditAplication.GetByIdAsync(applicationId);
+            if (creditapp.AmountPaid == null)
+            {
+                creditapp.AmountPaid = paymentAmount;
+            }
+            else
+            {
+                creditapp.AmountPaid += paymentAmount;
+            }
+            creditapp.LastDayPaid = DateTime.Now;
+            await _creditAplication.UpdateAsync(creditapp);
+            return RedirectToAction("Index");
+        }
+      
     }
 }

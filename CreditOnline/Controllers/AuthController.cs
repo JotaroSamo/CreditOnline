@@ -68,10 +68,10 @@ namespace CreditOnline.Controllers
                 }
 
                 var claims = new List<Claim>()
-        {
-            new Claim(ClaimTypes.NameIdentifier, user.UserID.ToString()),
-            new Claim(ClaimTypes.Role, user.UserTypes.ToString())
-        };
+                {
+                    new Claim(ClaimTypes.NameIdentifier, user.UserID.ToString()),
+                    new Claim(ClaimTypes.Role, user.UserTypes.ToString())
+                };
 
                 if (user.UserTypes.ToString() == "Администратор")
                 {
@@ -84,7 +84,7 @@ namespace CreditOnline.Controllers
 
                 var userClaimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(userClaimsIdentity));
-                return RedirectToAction("UserTools", "User");
+                return RedirectToAction("Index", "Client");
             }
             catch (Exception)
             {

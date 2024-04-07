@@ -101,6 +101,8 @@
                                     <label for="loanAmount">Сумма кредита (BYN):</label>
                                     <input type="number" class="form-control" id="loanAmount" name="loanAmount" required>
                                 </div>
+
+                                <input type="hidden" name="InterestRate" value="@creditCard.InterestRate" />
                                 <input type="hidden" name="cardId" value="@creditCard.CardID" />
                                 <button type="submit" class="btn btn-success">Оформить</button>
                             </form>
@@ -130,18 +132,7 @@
                 });
             });
         });
-        $(function () {
-            // Обработчик изменения значения в поле ввода суммы кредита
-            $('#loanAmount').on('input', function () {
-                var maxAmount = parseFloat('@creditCard.MaxAmount'); // Максимальная сумма кредита на выбранной карте
-                var inputAmount = parseFloat($(this).val()); // Введенная пользователем сумма кредита
 
-                // Если введенная сумма больше максимальной суммы, устанавливаем значение поля ввода на максимальную сумму
-                if (inputAmount > maxAmount) {
-                    $(this).val(maxAmount);
-                }
-            });
-        });
     </script>
 </body>
 </html>

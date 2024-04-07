@@ -71,10 +71,11 @@
                         <a class="nav-link" href="/Admin/NewCreditCard">Создать новый кредит</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Просмотр заявок</a>
+
+                        <a class="nav-link" href="/Admin/CreditApplication">Просмотр заявок</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Просмотр пользователей</a>
+                        <a class="nav-link" formmethod="get" href="/Admin/UsersPage">Просмотр пользователей</a>
                     </li>
                 </ul>
                 <form id="searchForm" class="form-inline ml-auto">
@@ -112,14 +113,15 @@
                                 <label for="UserTypes">Тип пользователя:</label>
                                 <select asp-for="UserTypes" class="form-control" id="UserTypes" name="UserTypes" required>
                                     <option value="@Model.UserTypes">@Model.UserTypes.ToString()</option>
-                                    @if (Model.UserTypes.ToString() == "Администратор")
+                                    @if (Model.UserTypes == UserType.Администратор)
                                     {
-                                        <option value="0">Клиент</option>
 
+                                        <option value="@UserType.Клиент">Клиент</option>
+                                        
                                     }
                                     else
                                     {
-                                        <option value="1">Администратор</option>
+                                        <option value="@UserType.Администратор">Администратор</option>
                                     }
                             </select>
                             </div>

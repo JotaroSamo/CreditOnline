@@ -74,10 +74,6 @@
                         <a class="nav-link" formmethod="get" href="/Client/EditUsers">Редактировать аккаунт</a>
                     </li>
                 </ul>
-                <form id="searchForm" class="form-inline ml-auto">
-                    <input id="searchInput" class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search">
-                    <button class="btn btn-primary my-2 my-sm-0" type="submit">Найти</button>
-                </form>
             </div>
         </div>
     </nav>
@@ -104,6 +100,7 @@
                             <div class="form-group">
                                 <label for="Salary">Зарплата BYN:</label>
                                 <input type="text" class="form-control" id="Salary" name="Salary" value="@Model.Salary">
+                                <input type="hidden" name="UserTypes" value="@Model.UserTypes" />
                             </div> 
                             <input type="hidden" name="UserID" value="@Model.UserID" />
                             <button type="submit" class="btn btn-primary">Сохранить изменения</button>

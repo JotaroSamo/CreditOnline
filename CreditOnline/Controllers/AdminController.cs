@@ -74,5 +74,18 @@ namespace CreditOnline.Controllers
             await _user.UpdateAsync(user);
             return RedirectToAction("UsersPage");
         }
+        public async Task<IActionResult> CreditApplication()
+        {
+            var creditAplications = await _creditAplication.GetAllAsync();
+            return View(creditAplications);
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreditApplicationStatus(CreditAplication creditAplication, ApplicationStatus newStatus)
+        {
+            var creditapp = await _creditAplication.GetByIdAsync(creditAplication.ApplicationID);
+            creditapp.Status = newStatus;
+            await _creditAplication.UpdateAsync(creditapp);
+            return RedirectToAction("CreditApplication");
+        }
     }
 }

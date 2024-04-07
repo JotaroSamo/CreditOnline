@@ -23,12 +23,14 @@ internal class Program
 
         builder.Services.AddSession(options =>
         {
-            options.IdleTimeout = TimeSpan.FromMinutes(30);
+            options.IdleTimeout = TimeSpan.FromMinutes(10);
             options.Cookie.HttpOnly = true;
             options.Cookie.IsEssential = true;
         });
+
         builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
         builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -43,8 +45,10 @@ internal class Program
         app.UseStaticFiles();
 
         app.UseRouting();
-
+        app.UseSession(); // Добавьте этот вызов
+        app.UseAuthentication();
         app.UseAuthorization();
+
 
         app.MapControllerRoute(
             name: "default",

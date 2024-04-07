@@ -94,16 +94,32 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Заявка на кредит</h5>
-                            <p class="card-text">Сумма кредита: @creditApplication.LoanAmount</p>
+                            <p class="card-text">Сумма кредита BYN: @creditApplication.LoanAmount</p>
                             <p class="card-text">Статус: @creditApplication.Status</p>
                             <p class="card-text">Дата подачи заявки: @creditApplication.ApplicationDate</p>
+                            @if (creditApplication.AmountPaid!=null)
+                            {
+                                <p class="card-text">Уже оплачено BYN: @creditApplication.AmountPaid</p>
+                            }
                          
+                            @if (creditApplication.Status == ApplicationStatus.Одобрено)
+                            {
+                                <form method="post" action="/Client/PayCredit">
+                                    <div class="form-group">
+                                        <label for="paymentAmount">Сумма оплаты (BYN):</label>
+                                        <input type="number" class="form-control" id="paymentAmount" name="paymentAmount" required>
+                                        <input type="hidden" name="applicationId" value="@creditApplication.ApplicationID" />
+                                    </div>
+                                    <button type="submit" class="btn btn-success">Оплатить</button>
+                                </form>
+                            }
                         </div>
                     </div>
                 </div>
             }
         </div>
     </div>
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
@@ -124,6 +140,7 @@
                 });
             });
         });
+
     </script>
 </body>
 </html>
