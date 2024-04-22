@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditOnline", "CreditOnline\CreditOnline.csproj", "{28BB24A2-2881-4B68-9E08-AB6C967A6BF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreditOnline", "CreditOnline\CreditOnline.csproj", "{28BB24A2-2881-4B68-9E08-AB6C967A6BF5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogicalModel", "..\OnlineCredit\Model\LogicalModel.csproj", "{38E5A591-E5AD-4EE6-8CAB-9273D636EAA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuissnesLogical", "BuissnesLogical\BuissnesLogical.csproj", "{40DEF6C6-8B47-4067-87C4-F9D3FF38A4A2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuissnesLogical", "..\OnlineCredit\BuissnesLogical\BuissnesLogical.csproj", "{98B95692-95E6-410D-A1A0-4199A5F344B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogicalModel", "Model\LogicalModel.csproj", "{2C1B3B89-C10A-4EA9-A086-865A41D10E99}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +19,14 @@ Global
 		{28BB24A2-2881-4B68-9E08-AB6C967A6BF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28BB24A2-2881-4B68-9E08-AB6C967A6BF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28BB24A2-2881-4B68-9E08-AB6C967A6BF5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{38E5A591-E5AD-4EE6-8CAB-9273D636EAA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{38E5A591-E5AD-4EE6-8CAB-9273D636EAA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{38E5A591-E5AD-4EE6-8CAB-9273D636EAA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{38E5A591-E5AD-4EE6-8CAB-9273D636EAA9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{98B95692-95E6-410D-A1A0-4199A5F344B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{98B95692-95E6-410D-A1A0-4199A5F344B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{98B95692-95E6-410D-A1A0-4199A5F344B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{98B95692-95E6-410D-A1A0-4199A5F344B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40DEF6C6-8B47-4067-87C4-F9D3FF38A4A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40DEF6C6-8B47-4067-87C4-F9D3FF38A4A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40DEF6C6-8B47-4067-87C4-F9D3FF38A4A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40DEF6C6-8B47-4067-87C4-F9D3FF38A4A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C1B3B89-C10A-4EA9-A086-865A41D10E99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C1B3B89-C10A-4EA9-A086-865A41D10E99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C1B3B89-C10A-4EA9-A086-865A41D10E99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C1B3B89-C10A-4EA9-A086-865A41D10E99}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\OnlineCredit\BuissnesLogical\BuissnesLogical.csproj" />
+    <None Include="wwwroot\img\main.jpg" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\img\main.jpg" />
+    <ProjectReference Include="..\BuissnesLogical\BuissnesLogical.csproj" />
   </ItemGroup>
 
 </Project>
