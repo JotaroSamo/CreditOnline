@@ -32,6 +32,13 @@ namespace CreditOnline.Controllers
             return RedirectToAction("Index");
         }
         [HttpPost]
+        public async Task<IActionResult> HistoryPage(int UserID)
+        {
+            var creditHistory = await _user.GetByIdAsync(UserID);
+            var a = creditHistory.Applications.ToList();
+            return View(a);
+        }
+        [HttpPost]
         public async Task<IActionResult> Delete(int CardID)
         {
             await _creditCard.DeleteAsync(CardID);
