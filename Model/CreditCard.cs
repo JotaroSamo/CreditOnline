@@ -12,6 +12,9 @@ namespace LogicalModel
         [Key]
         public int CardID { get; set; } // Уникальный идентификатор карточки
 
+        public string? Name { get; set; }
+
+        public string? Description { get; set; }
         public int Term { get; set; } // Срок кредита в месяцах
 
         public decimal InterestRate { get; set; } // Процентная ставка
